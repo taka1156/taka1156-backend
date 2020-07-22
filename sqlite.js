@@ -1,10 +1,10 @@
-const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("counters.sqlite");
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('counters.sqlite');
 
 db.serialize(() => {
   let isViewer = false;
   // テーブルがなければ作成
-  db.run("CREATE TABLE IF NOT EXISTS counter(id INTEGER , viewer INTEGER)");
+  db.run('CREATE TABLE IF NOT EXISTS counter(id INTEGER , viewer INTEGER)');
   
   db.get('SELECT * FROM counter WHERE id = 0', function(err, row) {
     if (err) {
@@ -14,10 +14,9 @@ db.serialize(() => {
       isViewer = true;
     }
   });
-
-  // プリペアードステートメントでデータ挿入
+  
   if(!isViewer) {
-    db.run(`INSERT INTO counter values(0, 0)`, function(err) {
+    db.run('INSERT INTO counter values(0, 0)', function(err) {
       if (err) {
         return console.error(err.message);
       }
