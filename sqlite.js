@@ -7,8 +7,12 @@ db.serialize(() => {
   db.run("CREATE TABLE IF NOT EXISTS counter(id INTEGER , viewer INTEGER)");
   
   db.get('SELECT * FROM counter WHERE id = 0', function(err, row) {
-    isViewer = row.viewer ? true : false;
-    console.log(`row.id=>${row.id}, row.viewer=>${row.viewer}`);
+    if (err) {
+      return console.error(err.message);
+    }
+    if(row != null) {
+      isViewer = true;
+    }
   });
 
   // プリペアードステートメントでデータ挿入
