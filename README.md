@@ -1,8 +1,8 @@
 # AccsessCounter
 
 ## 概要
-Glitch + Express.js + Sqliteで作成したアクセスカウンターです
-githubの自己紹介用README.mdで使用しています。
+Glitch + Express.js + Sqliteで作成したアクセスカウンターです。<br>
+githubの自己紹介用README.mdで使用しています。<br>
 
 ## 仕組み
 sqliteでアクセスが来るたびにカウントを行い、その度に、
