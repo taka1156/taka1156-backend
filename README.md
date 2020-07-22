@@ -1,4 +1,4 @@
-# AccsessCounter
+# AccessCounter
 
 ## 概要
 Glitch + Express.js + Sqliteで作成したアクセスカウンターです。<br>
