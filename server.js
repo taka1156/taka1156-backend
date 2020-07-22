@@ -39,6 +39,11 @@ function makeSvg(viewer) {
 
 // 簡易的な生死確認
 app.get("/", (req, res) => {
+  const client = req.query.client
+  if (client === 'gas') {
+    res.send('Glitch woke up')
+    return
+  }
   res.send("<h1>Server is running</h1>");
 });
 
