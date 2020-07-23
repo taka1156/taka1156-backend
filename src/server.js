@@ -40,10 +40,16 @@ app.get('/date.svg', asyncHandler(async (req, res) => {
 
 app.get('/GithubStatus.svg', asyncHandler(async (req, res) => {
   const GITHUB_ACCOUNT = process.env.GITHUB_ACCOUNT;
-  const GITHUB_API = `https://api.github.com/users/${GITHUB_ACCOUNT}/repos?per_page=100&page=1`;
+  const GITHUB_API = `https://api.github.com/users/${GITHUB_ACCOUNT}/repos`;
+  const PARAMS = {
+    per_page: 100,
+    page: 1,
+    client_id: process.env.id,
+    client_secret: process.env.secret
+  }
 
   const { data }  = await axios
-  .get(GITHUB_API)
+  .get(GITHUB_API,{ params: PARAMS })
   .catch((e) => {
     console.log(e.message);
   });
