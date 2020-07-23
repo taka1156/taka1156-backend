@@ -1,8 +1,11 @@
 const express = require('express');
+const axios = require('axios');
 const asyncHandler = require('express-async-handler'); // expressでもasync使いたい
 const app = express();
 const db = require('./tools/db/sqlite.js');
-const { generateVisiterSvg, generateDateSvg } = require('./tools/svg/svgGen.js')
+const svg = require('./tools/svg/svgGen.js')
+const github = require('./tools/github.js');
+require('dotenv').config();
 
 // 簡易的な生死確認
 app.get('/', (req, res) => {
@@ -22,7 +25,7 @@ app.get('/counter.svg', asyncHandler(async (req, res) => {
       'content-type': 'image/svg+xml',
       'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
     });
-    res.send(generateVisiterSvg(VIEWER));
+    res.send(svg.generateVisiterSvg(VIEWER));
 }));
 
 // 画像返却(日付)
@@ -32,7 +35,27 @@ app.get('/date.svg', asyncHandler(async (req, res) => {
     'content-type': 'image/svg+xml',
     'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
   });
-  res.send(generateDateSvg(FORMAT_DATE));
+  res.send(svg.generateDateSvg(FORMAT_DATE));
+}));
+
+app.get('/GithubStatus.svg', asyncHandler(async (req, res) => {
+  const GITHUB_ACCOUNT = process.env.GITHUB_ACCOUNT;
+  const GITHUB_API = `https://api.github.com/users/${GITHUB_ACCOUNT}/repos?per_page=100&page=1`;
+
+  const { data }  = await axios
+  .get(GITHUB_API)
+  .catch((e) => {
+    console.log(e.message);
+  });
+
+  const REPO_LANGS = github.ShapedData(data);
+
+  res.set({
+    'content-type': 'image/svg+xml',
+    'cache-control': 'max-age=0, no-cache, no-store, must-revalidate'
+  });
+  
+  res.send(svg.generateGithubSvg(REPO_LANGS));
 }));
 
 // listen for requests :)
@@ -41,5 +64,6 @@ const listener = app.listen(process.env.PORT, () => {
   console.log(`[ http://localhost:${listener.address().port} ]`);
   console.log(`[ http://localhost:${listener.address().port}/counter.svg ]`);
   console.log(`[ http://localhost:${listener.address().port}/date.svg ]`);
+  console.log(`[ http://localhost:${listener.address().port}/GithubStatus.svg ]`);
   console.log('======================================')
 });
