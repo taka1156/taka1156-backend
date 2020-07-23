@@ -7,12 +7,14 @@
   "description": "A simple Node app built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "sqlite3": "^5.0.0",
-    "express-async-handler": "^1.1.4"
+    "express-async-handler": "^1.1.4",
+    "sqlite3": "^5.0.0"
   },
   "engines": {
     "node": "12.x"
