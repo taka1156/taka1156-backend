@@ -18,7 +18,7 @@ function ShapedData(repos) {
         count++;
       }
     });
-    const RATE = Math.ceil(count / repo_langs.length * 100);
+    const RATE = Math.round(count / repo_langs.length * 100);
     graph.push({ lang: LANG, rate: RATE });
   }
 
