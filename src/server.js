@@ -4,6 +4,7 @@ const router = require('./routes/v1/');
 require('dotenv').config();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // 簡易的な生死確認
 app.get('/', (req, res) => {
   const client = req.query.client
@@ -60,6 +61,9 @@ app.get('/GithubStatus.svg', asyncHandler(async (req, res) => {
   
   res.send(svg.generateGithubSvg(REPO_LANGS));
 }));
+=======
+app.use('/api/v1/', router);
+>>>>>>> glitch
 =======
 app.use('/api/v1/', router);
 >>>>>>> glitch
