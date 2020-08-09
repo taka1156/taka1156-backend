@@ -1,12 +1,15 @@
-# AccessCounter
+# taka1156-backend
 
 ## 概要
-Glitch + Express.js + Sqliteで作成したアクセスカウンターです。<br>
-githubの自己紹介用README.mdで使用しています。<br>
+Glitch + Express.js で作成したプロフィールREADME用のバックエンド処理です。<br>
 
 ## 仕組み
+- アクセスカウンター <br>
 sqliteでアクセスが来るたびにカウントを行い、その度に、
-svgを動的に生成してheaderの`content-type`に`image/svg+xml`として送付しています。
+svgとして累計の閲覧人数を表示しています。
+
+- githubリポジトリ一覧 <br>
+GitHub APIにaxiosでパブリックリポジトリ一覧を取得し、言語ごとに割合にまとめてsvgとして使用割合を表示しています。
 
 その他、キャッシュを無効にしたり、スリープするのを防ぐために、Google App Scriptで五分毎に、
 Glitch Apiを叩く処理も使っています。
@@ -15,3 +18,5 @@ Glitch Apiを叩く処理も使っています。
 
 - 2020/07/22<br>
   アクセスカウンターの機能作成
+- 2020/08/09<br>
+フォルダ構成の見直し
