@@ -56,13 +56,13 @@ function generateGithubSvg(repos) {
   })
 
   const DISPLAY_LANGS = LANGS.reduce((accum, lang, i) => {
-    return accum + `<rect id="Rectangle" fill="#000000" x="0" y=\"${ HEIGHT * i }\" width="250" height=\"${ HEIGHT }\"></rect>
+    return accum + `<rect id="Rectangle" fill="#000000" x="0" y=\"${ HEIGHT * i }\" width="300" height=\"${ HEIGHT }\"></rect>
         <text id="0" font-family="Courier" font-size="24" font-weight="normal" fill=\"${ COLOR }\">
             <tspan x="0" y=\"${ HEIGHT * i + 20 }\">${ lang }</tspan>
         </text>`;
   }, '');
 
-  return `<svg width=\"${ WIDTH * 100 }px\" height=\"${ HEIGHT * 300 }px\" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  return `<svg width=\"${ WIDTH * 8 }px\" height=\"${ HEIGHT * repos.length - 5}px\" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>Counter</title>
         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         ${ DISPLAY_LANGS }

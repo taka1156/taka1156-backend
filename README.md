@@ -1,30 +1,22 @@
-# hello-express
+# taka1156-backend
 
-A server that serves a webpage, its resources, and some data
+## 概要
+Glitch + Express.js で作成したプロフィールREADME用のバックエンド処理です。<br>
 
+## 仕組み
+- アクセスカウンター <br>
+sqliteでアクセスが来るたびにカウントを行い、その度に、
+svgとして累計の閲覧人数を表示しています。
 
-## Your Project
+- githubリポジトリ一覧 <br>
+GitHub APIにaxiosでパブリックリポジトリ一覧を取得し、言語ごとに割合にまとめてsvgとして使用割合を表示しています。
 
-On the front-end,
+その他、キャッシュを無効にしたり、スリープするのを防ぐために、Google App Scriptで五分毎に、
+Glitch Apiを叩く処理も使っています。
 
-- Edit `views/index.html` to change the content of the webpage
-- `public/client.js` is the javacript that runs when you load the webpage
-- `public/style.css` is the styles for `views/index.html`
-- Drag in `assets`, like images or music, to add them to your project
+### 更新履歴
 
-On the back-end,
-
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
-
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy.
-
-
-## Made by [Glitch](https://glitch.com/)
-
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
-
-Find out more [about Glitch](https://glitch.com/about).
-
-( ᵔ ᴥ ᵔ )
+- 2020/07/22<br>
+  アクセスカウンターの機能作成
+- 2020/08/09<br>
+フォルダ構成の見直し
