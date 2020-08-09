@@ -52,7 +52,6 @@ function generateDateSvg(date) {
 function generateGithubSvg(repos) {
   
   const LANGS = repos.map((repo) => {
-    console.log(`${ paddingLeft(' ', repo.lang, 10) }: ${ repo.rate }%`)
     return `${ paddingLeft(' ', repo.lang, 10) }: ${ repo.rate }%`;
   })
 
