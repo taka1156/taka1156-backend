@@ -1,12 +1,9 @@
 const express = require('express');
-const axios = require('axios');
-const asyncHandler = require('express-async-handler'); // expressでもasync使いたい
 const app = express();
-const db = require('./tools/db/sqlite.js');
-const svg = require('./tools/svg/svgGen.js')
-const github = require('./tools/github.js');
+const router = require('./routes/v1/');
 require('dotenv').config();
 
+<<<<<<< HEAD
 // 簡易的な生死確認
 app.get('/', (req, res) => {
   const client = req.query.client
@@ -63,13 +60,18 @@ app.get('/GithubStatus.svg', asyncHandler(async (req, res) => {
   
   res.send(svg.generateGithubSvg(REPO_LANGS));
 }));
+=======
+app.use('/api/v1/', router);
+>>>>>>> glitch
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+const PORT = process.env.PORT || 3000;
+
+const listener = app.listen(PORT, () => {
   console.log('=============== Routers ===============')
   console.log(`[ http://localhost:${listener.address().port} ]`);
-  console.log(`[ http://localhost:${listener.address().port}/counter.svg ]`);
-  console.log(`[ http://localhost:${listener.address().port}/date.svg ]`);
-  console.log(`[ http://localhost:${listener.address().port}/GithubStatus.svg ]`);
+  console.log(`[ http://localhost:${listener.address().port}/api/v1/visiter.svg ]`);
+  console.log(`[ http://localhost:${listener.address().port}/api/v1//date.svg ]`);
+  console.log(`[ http://localhost:${listener.address().port}/api/v1//github.svg ]`);
   console.log('======================================')
 });
