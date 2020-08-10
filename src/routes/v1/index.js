@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
 
 // 画像返却(閲覧回数)
 router.get('/visiter.svg', asyncHandler(async (req, res) => {
-    const VISITER_COUNTS_SVG = await middleware.getVisiterCounts();
+    const { color  } = req.query;
+    const VISITER_COUNTS_SVG = await middleware.getVisiterCounts(color);
     res.set(HEADERS);
     res.send(VISITER_COUNTS_SVG);
   })
@@ -27,14 +28,16 @@ router.get('/visiter.svg', asyncHandler(async (req, res) => {
 
 // 画像返却(日付)
 router.get('/date.svg', asyncHandler(async (req, res) => {
-    const DATE_SVG = middleware.getDate();
+    const { color  } = req.query;
+    const DATE_SVG = middleware.getDate(color);
     res.set(HEADERS);
     res.send(DATE_SVG);
   })
 );
 
 router.get('/github.svg', asyncHandler(async (req, res) => {
-    const GITHUB_REPOS_SVG = await middleware.getGithubRepos();
+    const { account } = req.query;
+    const GITHUB_REPOS_SVG = await middleware.getGithubRepos(account);
     res.set(HEADERS);
     res.send(GITHUB_REPOS_SVG);
   })
