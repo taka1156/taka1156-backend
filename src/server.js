@@ -9,10 +9,10 @@ app.use('/api/v1/', router);
 const PORT = process.env.PORT || 3000;
 
 const listener = app.listen(PORT, () => {
-  console.log('=============== Routers ===============')
+  console.log('=============== Routes ===============')
   console.log(`[ http://localhost:${listener.address().port} ]`);
   console.log(`[ http://localhost:${listener.address().port}/api/v1/visiter.svg ]`);
-  console.log(`[ http://localhost:${listener.address().port}/api/v1//date.svg ]`);
-  console.log(`[ http://localhost:${listener.address().port}/api/v1//github.svg ]`);
+  console.log(`[ http://localhost:${listener.address().port}/api/v1/date.svg ]`);
+  console.log(`[ http://localhost:${listener.address().port}/api/v1/github.svg ]`);
   console.log('======================================')
 });
