@@ -36,8 +36,8 @@ router.get('/date.svg', asyncHandler(async (req, res) => {
 );
 
 router.get('/github.svg', asyncHandler(async (req, res) => {
-    const { account } = req.query;
-    const GITHUB_REPOS_SVG = await middleware.getGithubRepos(account);
+    const { account, bgcolor} = req.query;
+    const GITHUB_REPOS_SVG = await middleware.getGithubRepos(account, bgcolor);
     res.set(HEADERS);
     res.send(GITHUB_REPOS_SVG);
   })

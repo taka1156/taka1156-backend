@@ -49,9 +49,14 @@ function generateDateSvg(date, color = COLOR) {
 }
 
 // SVG生成(Github)
-function generateGithubSvg(repos) {
+function generateGithubSvg(repos, bgcolor = 'white' ) {
   
   const LANGS = repos.map((repo) => {
+    // 黄色は見にくいので金色に変更
+    if (repo.color === 'yellow') {
+      repo.color = 'goldenrod';
+    }
+
     return {
       name: `${ paddingLeft(' ', repo.name, 10) }: ${ repo.rate }%`,
       color: repo.color,
@@ -59,13 +64,14 @@ function generateGithubSvg(repos) {
   })
 
   const DISPLAY_LANGS = LANGS.reduce((accum, lang, i) => {
-    return accum + `<rect id="Rectangle" fill="whitesomke" x="0" y=\"${ HEIGHT * i }\" width="400" height=\"${ HEIGHT }\"></rect>
-        <text id="0" font-family="Courier" font-size="24" font-weight="normal" fill=\"${ lang.color }\">
-            <tspan x="0" y=\"${ HEIGHT * i + 20 }\">${ lang.name }</tspan>
+    return accum + `<rect id="Rectangle" fill=\"${bgcolor}\" x="0" y=\"${ HEIGHT * i }\" width="400" height=\"${ HEIGHT }\"></rect>
+        <circle cx="30" cy=\"${ HEIGHT * i + 15 }\" r="6" fill=\"${ lang.color }\" />
+        <text id="20" font-family="Courier" font-size="24" font-weight="normal" fill=\"${ lang.color }\">
+          <tspan x="50" y=\"${ HEIGHT * i + 20 }\">${ lang.name }</tspan>
         </text>`;
   }, '');
 
-  return `<svg width=\"${ WIDTH * 9.5 }px\" height=\"${ HEIGHT * repos.length - 5}px\" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  return `<svg width=\"${ WIDTH * 10 }px\" height=\"${ HEIGHT * repos.length - 2}px\" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>Most Used Languages</title>
         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         ${ DISPLAY_LANGS }
