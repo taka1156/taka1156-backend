@@ -35,6 +35,7 @@ router.get('/date.svg', asyncHandler(async (req, res) => {
   })
 );
 
+// 画像返却(githubの言語使用率)
 router.get('/github.svg', asyncHandler(async (req, res) => {
     const { account, bgcolor} = req.query;
     const GITHUB_REPOS_SVG = await middleware.getGithubRepos(account, bgcolor);
