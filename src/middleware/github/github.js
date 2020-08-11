@@ -3,7 +3,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 // リポジトリデータを、Github APIから取得してSVGに変換して返却
-async function getGithubRepos(account = 'taka1156') {
+async function getGithubRepos(account = 'taka1156', bgcolor) {
   const GITHUB_API = `https://api.github.com/graphql`;
   const QUERY = graphQLQuery(account);
   const repos = await axios({
@@ -23,7 +23,7 @@ async function getGithubRepos(account = 'taka1156') {
     });
 
   const REPOS = ShapedData(repos);
-  return generateGithubSvg(REPOS);
+  return generateGithubSvg(REPOS, bgcolor);
 }
 
 // リポジトリデータを整形
@@ -78,7 +78,7 @@ function ShapedData(repos) {
     return {
       name: lang.name,
       color: lang.color,
-      rate: Math.round((lang.size / TOTAL_SIZE) * 10000) / 100,
+      rate: Math.round((lang.size / TOTAL_SIZE) * 100),
     };
   });
 
