@@ -65,13 +65,13 @@ function generateGithubSvg(repos, bgcolor = 'white' ) {
 
   const DISPLAY_LANGS = LANGS.reduce((accum, lang, i) => {
     return accum + `<rect id="Rectangle" fill=\"${bgcolor}\" x="0" y=\"${ HEIGHT * i }\" width="400" height=\"${ HEIGHT }\"></rect>
-        <circle cx="30" cy=\"${ HEIGHT * i + 15 }\" r="6" fill=\"${ lang.color }\" />
+        <circle cx="8" cy=\"${ HEIGHT * i + 15 }\" r="6" fill=\"${ lang.color }\" />
         <text id="20" font-family="Courier" font-size="24" font-weight="normal" fill=\"${ lang.color }\">
-          <tspan x="50" y=\"${ HEIGHT * i + 20 }\">${ lang.name }</tspan>
+          <tspan x="20" y=\"${ HEIGHT * i + 20 }\">${ lang.name }</tspan>
         </text>`;
   }, '');
 
-  return `<svg width=\"${ WIDTH * 10 }px\" height=\"${ HEIGHT * repos.length - 2}px\" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  return `<svg width=\"${ WIDTH * 9 }px\" height=\"${ HEIGHT * repos.length - 2}px\" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>Most Used Languages</title>
         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         ${ DISPLAY_LANGS }
