@@ -4,17 +4,10 @@ const WIDTH = 27;
 const DIGIT = 9; //桁
 const COLOR = 'cornflowerblue'
 
-// 左詰め
-function paddingLeft(char, str, digit) {
-  const PADDING_CHAR = Array(10).fill(char).join('');
-  return (PADDING_CHAR + str).slice(-digit);
-}
-
 // SVG生成(閲覧者数)
 function generateVisiterSvg(viewer, color = COLOR) {
-  const FOMAT_NUM =  paddingLeft('0', viewer, DIGIT);
 
-  const DISPLAY_NUM = FOMAT_NUM.split('').reduce((accum, num, i) => {
+  const DISPLAY_NUM = viewer.reduce((accum, num, i) => {
     return accum + `<rect id="Rectangle" fill="#000000" x=\"${ i * WIDTH }\" y="0" width=\"${ WIDTH }\" height=\"${ HEIGHT }\"></rect>
         <text id="0" font-family="Courier" font-size="24" font-weight="normal" fill=\"${ color }\">
             <tspan x=\"${ i * WIDTH + 6 }\" y="22">${ num }</tspan>
