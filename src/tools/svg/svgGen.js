@@ -57,7 +57,7 @@ function generateGithubSvg(repos, bgcolor = 'white' ) {
     }
 
     return {
-      name: `${ paddingLeft(' ', repo.name, 10) }: ${ repo.rate }%`,
+      name: `${ repo.name }: ${ repo.rate }%`,
       color: repo.color,
     };
   })
