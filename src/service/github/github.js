@@ -1,37 +1,22 @@
-const { generateGithubSvg } = require('../../tools/svg/svgGen.js');
-const axios = require('axios');
-require('dotenv').config();
+const { generateGithubSvg } = require('../../tools/svg/generate-svg.js');
+const { fetcher } = require('../../tools/fetch/github-fetcher.js');
 
 // リポジトリデータを、Github APIから取得してSVGに変換して返却
-async function getGithubRepos(account = 'taka1156', bgcolor) {
-  const GITHUB_API = `https://api.github.com/graphql`;
+async function getGithubReposSvg(account = 'taka1156', bgcolor) {
+  const GITHUB_URL = `https://api.github.com/graphql`;
   const QUERY = graphQLQuery(account);
-  const repos = await axios({
-    headers: { Authorization: `bearer ${process.env.GITHUB_TOKEN}` },
-    url: GITHUB_API,
-    method: 'post',
-    data: QUERY,
-  })
-    .then(({ data }) => {
-      let result = Array.from(data.data.user.repositories.nodes);
-      result = result.filter((repo) => repo.languages.edges.length !== 0);
-      result = result.map((repo) => repo.languages);
-      return result;
-    })
-    .catch((e) => {
-      console.log(e.message);
-    });
+  const REPOS = await fetcher(GITHUB_URL, QUERY);
 
-  const REPOS = ShapedData(repos);
-  return generateGithubSvg(REPOS, bgcolor);
+  const SHAPED_REPOS = shapedGithubRepos(REPOS);
+  return generateGithubSvg(SHAPED_REPOS, bgcolor);
 }
 
 // リポジトリデータを整形
-function ShapedData(repos) {
+function shapedGithubRepos(repos) {
   // 各リポジトリの情報を{言語、イメージカラー、サイズ}オブジェクトの配列にする
   let langs = [];
   repos.forEach((repo) => {
-    repo.edges.forEach((lang) => {
+    repo.forEach((lang) => {
       const { size, node } = lang;
       langs.push({
         name: node.name,
@@ -46,7 +31,7 @@ function ShapedData(repos) {
   const LANGS_COLOR = [...new Set([...langs.map((lang) => lang.color)])];
   // 言語ごとの合計ファイルサイズの配列を作り初期化
   const LANGS_TOTAL_SIZE = new Array(LANGS_NAME.length).fill(0);
-  
+
   // 言語ごとの合計データ数を算出
   LANGS_NAME.forEach((lang, index) => {
     for (let i = 0, max = langs.length; i < max; i++) {
@@ -71,7 +56,10 @@ function ShapedData(repos) {
   // トップ5件のみ切り出し
   const TOP_USED_LANGS = REPOS_DATA.slice(0, 5);
   // トップ5件の合計サイズ
-  const TOTAL_SIZE = TOP_USED_LANGS.reduce((accum, repo) => (accum += repo.size), 0);
+  const TOTAL_SIZE = TOP_USED_LANGS.reduce(
+    (accum, repo) => (accum += repo.size),
+    0
+  );
 
   // トップ5件の総データサイズを母数とした割合を出す
   const RESULT = TOP_USED_LANGS.map((lang) => {
@@ -81,8 +69,6 @@ function ShapedData(repos) {
       rate: Math.round((lang.size / TOTAL_SIZE) * 100),
     };
   });
-
-  console.log(RESULT);
 
   return RESULT;
 }
@@ -109,4 +95,4 @@ function graphQLQuery(account) {
   };
 }
 
-module.exports = { getGithubRepos };
+module.exports = { getGithubReposSvg };
