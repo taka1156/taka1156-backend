@@ -1,4 +1,4 @@
-const { generateDateSvg } = require('../../tools/svg/svgGen.js');
+const { generateDateSvg } = require('../../tools/svg/generate-svg.js');
 
 // 日付をSVG変換して返却
 function getDateSvg(color) {

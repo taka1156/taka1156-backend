@@ -1,5 +1,5 @@
 const db = require('../../tools/db/sqlite.js');
-const { generateVisiterSvg } = require('../../tools/svg/svgGen.js');
+const { generateVisiterSvg } = require('../../tools/svg/generate-svg.js');
 
 // 閲覧者を計算して返却
 async function getVisiterCountsSvg(color) {

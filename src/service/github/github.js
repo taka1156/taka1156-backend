@@ -1,4 +1,4 @@
-const { generateGithubSvg } = require('../../tools/svg/svgGen.js');
+const { generateGithubSvg } = require('../../tools/svg/generate-svg.js');
 const { fetcher } = require('../../tools/fetch/github-fetcher.js');
 
 // リポジトリデータを、Github APIから取得してSVGに変換して返却
