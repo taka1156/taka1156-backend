@@ -1,9 +1,9 @@
-const { getVisiterCounts } = require('./visiter/visiter.js');
-const { getDate } = require('./date/date.js');
-const { getGithubRepos } = require('./github/github.js');
+const { getVisiterCountsSvg } = require('./visiter/visiter.js');
+const { getDateSvg } = require('./date/date.js');
+const { getGithubReposSvg } = require('./github/github.js');
 
 module.exports = {
-  getVisiterCounts,
-  getDate,
-  getGithubRepos,
+  getVisiterCountsSvg,
+  getDateSvg,
+  getGithubReposSvg,
 };

@@ -2,7 +2,7 @@ const { generateGithubSvg } = require('../../tools/svg/svgGen.js');
 const { fetcher } = require('../../tools/fetch/github-fetcher.js');
 
 // リポジトリデータを、Github APIから取得してSVGに変換して返却
-async function getGithubRepos(account = 'taka1156', bgcolor) {
+async function getGithubReposSvg(account = 'taka1156', bgcolor) {
   const GITHUB_URL = `https://api.github.com/graphql`;
   const QUERY = graphQLQuery(account);
   const REPOS = await fetcher(GITHUB_URL, QUERY);
@@ -95,4 +95,4 @@ function graphQLQuery(account) {
   };
 }
 
-module.exports = { getGithubRepos };
+module.exports = { getGithubReposSvg };
