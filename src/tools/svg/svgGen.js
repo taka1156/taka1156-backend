@@ -45,8 +45,8 @@ function generateGithubSvg(repos, bgcolor = 'white' ) {
   
   const LANGS = repos.map((repo) => {
     // 黄色は見にくいので金色に変更
-    if (repo.color === 'yellow') {
-      repo.color = 'goldenrod';
+    if (repo.color === '#f1e05a') {
+      repo.color = 'gold';
     }
 
     return {
