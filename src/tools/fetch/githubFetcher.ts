@@ -2,15 +2,7 @@ import axios from 'axios';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-type AxiosRaw = RawRepo[];
-
-type RepoNodes = {
-  languages: {
-    edges: RepoInfo[];
-  };
-};
-
-const fetcher = async (url: string, query: Query): Promise<AxiosRaw> => {
+const fetcher = async (url: string, query: Query): Promise<AxiosResult> => {
   return await axios({
     headers: { Authorization: `bearer ${process.env.GITHUB_TOKEN}` },
     url: url,
@@ -18,16 +10,21 @@ const fetcher = async (url: string, query: Query): Promise<AxiosRaw> => {
     data: query,
   })
     .then(
-      ({ data }): AxiosRaw => {
-        let result: RepoNodes[] = Array.from(data.data.user.repositories.nodes);
-        result = result.filter(repo => repo.languages.edges.length !== 0);
-        return result.map(repo => repo.languages.edges);
+      ({ data }): AxiosResult => {
+        const user = data.data.user;
+        if (user != null) {
+          let result: RepoLang[] = Array.from(user.repositories.nodes);
+          result = result.filter(repo => repo.languages.edges.length !== 0);
+          return { isSuccess: true, data: result };
+        } else {
+          return { isSuccess: true, data: [] };
+        }
       }
     )
     .catch(
-      (e): AxiosRaw => {
+      (e): AxiosResult => {
         console.log(e.message);
-        return [];
+        return { isSuccess: false, data: [] };
       }
     );
 };
