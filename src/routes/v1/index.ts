@@ -1,6 +1,6 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler'; // expressでもasync使いたい
-import service from '~/service/index';
+import service from '~/service/';
 import svg from '~/tools/svg/generateSvg';
 
 const router: express.Router = express.Router();

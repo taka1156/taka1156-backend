@@ -1,4 +1,4 @@
-// Express Port
+// Expressのポート番号
 type ServerPort = string | number;
 
 // 背景色、文字色など
@@ -8,24 +8,34 @@ type Color = string;
 type SvgDisplay = string[];
 
 // svg表示用の文字列(github)
-type SvgDisplayRepo = {
+interface SvgDisplayRepo {
   display: string;
   color: string;
-};
+}
+
+// axios
+interface AxiosResult {
+  isSuccess: boolean;
+  data: RepoLang[];
+}
 
 /* github */
-type Query = {
+interface Query {
   query: string;
-};
+}
 
-type RepoNode = {
+interface RepoNode {
   name: string;
   color: string;
-};
+}
 
-type RepoInfo = {
+interface RepoEdge {
   node: RepoNode;
   size: number;
-};
+}
 
-type RawRepo = RepoInfo[];
+interface RepoLang {
+  languages: {
+    edges: RepoEdge[];
+  };
+}
