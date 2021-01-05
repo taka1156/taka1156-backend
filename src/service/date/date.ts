@@ -1,6 +1,6 @@
 // 日付を整形して返却
-const getDate = (): string[] => {
-  const SHAPED_DATE = shapedDate(new Date());
+const getDate = (): SvgDisplay => {
+  const SHAPED_DATE: SvgDisplay = shapedDate(new Date());
   return SHAPED_DATE;
 };
 

@@ -1,34 +1,50 @@
 import { fetcher } from '~/tools/fetch/githubFetcher';
 
-type LangInfo = {
+interface LangInfo {
   name: string;
   color: string;
   size: number;
-};
+}
 
-type ShapedRepo = {
+interface ShapedRepo {
   name: string;
   color: string;
   rate: number;
-};
+}
+
+type RepoEdges = RepoEdge[];
 
 // リポジトリデータを、Github APIから取得して整形して返却
 const getGithubRepos = async (account = 'taka1156'): Promise<SvgDisplayRepo[]> => {
   const GITHUB_URL = `https://api.github.com/graphql`;
   const QUERY = graphQLQuery(account);
-  const REPOS: RawRepo[] = await fetcher(GITHUB_URL, QUERY);
-  // TODO: REPOが空の時の処理
-  const SHAPED_REPOS = shapedGithubRepos(REPOS);
-  const RESULT = calRepo(SHAPED_REPOS);
-  return RESULT;
+  const { isSuccess, data }: AxiosResult = await fetcher(GITHUB_URL, QUERY);
+
+  if (isSuccess && data.length !== 0) {
+    const SHAPED_REPOS = shapedGithubRepos(data);
+    const RESULT = calRepo(SHAPED_REPOS);
+    return RESULT;
+  } else {
+    // アカウントが存在しない
+    const ErrorSvg: SvgDisplayRepo[] = [
+      {
+        display: 'E: No data',
+        color: '#FF2400',
+      },
+    ];
+    return ErrorSvg;
+  }
 };
 
 // リポジトリデータを整形
-const shapedGithubRepos = (repos: RawRepo[]): LangInfo[] => {
+const shapedGithubRepos = (repos: RepoLang[]): LangInfo[] => {
+  // 各リポジトリをlanguagesから切り離す
+  const REPOS: RepoEdges[] = repos.map(repo => repo.languages.edges);
+
   // 各リポジトリの情報を{言語、イメージカラー、サイズ}オブジェクトの配列にする
   const langs: LangInfo[] = [];
-  repos.forEach((repo: RawRepo) => {
-    repo.forEach((lang: RepoInfo) => {
+  REPOS.forEach((repo: RepoEdges) => {
+    repo.forEach((lang: RepoEdge) => {
       const { size, node } = lang;
       langs.push({
         name: node.name,
@@ -41,7 +57,7 @@ const shapedGithubRepos = (repos: RawRepo[]): LangInfo[] => {
   // それぞれを単一の配列に整形
   const LANGS_NAME: string[] = [...new Set([...langs.map(lang => lang.name)])];
   const LANGS_COLOR: string[] = [...new Set([...langs.map(lang => lang.color)])];
-  // 言語ごとの合計ファイルサイズの配列を作り初期化
+  // 言語ごとの合計ファイルサイズを格納する配列を作り初期化
   const LANGS_TOTAL_SIZE: number[] = new Array(LANGS_NAME.length).fill(0);
 
   // 言語ごとの合計データ数を算出
@@ -65,6 +81,7 @@ const shapedGithubRepos = (repos: RawRepo[]): LangInfo[] => {
   return REPOS_DATA;
 };
 
+// リポジトリをsizeの降順にし、トップ五件に絞る
 const calRepo = (repos: LangInfo[]): SvgDisplayRepo[] => {
   const REPOS_DATA: LangInfo[] = repos;
   // サイズの大きい順にソート
