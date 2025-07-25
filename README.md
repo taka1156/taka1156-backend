@@ -1,7 +1,7 @@
 # taka1156-backend
 
 ## 概要
-Glitch + Express.js で作成したプロフィールREADME用のバックエンド処理です。<br>
+Vercel + Express.js で作成したプロフィールREADME用のバックエンド処理です。<br>
 
 ## 仕組み
 - アクセスカウンター <br>
@@ -10,9 +10,6 @@ svgとして累計の閲覧人数を表示しています。
 
 - githubリポジトリ一覧 <br>
 GitHub APIにaxiosでパブリックリポジトリ一覧を取得し、言語ごとに割合にまとめてsvgとして使用割合を表示しています。
-
-その他、キャッシュを無効にしたり、スリープするのを防ぐために、Google App Scriptで五分毎に、
-Glitch Apiを叩く処理も使っています。
 
 ### 更新履歴
 
