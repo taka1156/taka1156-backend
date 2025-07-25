@@ -1,7 +1,7 @@
 import express from 'express';
 import { Server } from 'http';
 import { AddressInfo } from 'net';
-import { router } from './routes/v1';
+import { router } from '@/routes/v1';
 import  dotenv from 'dotenv';
 dotenv.config();
 
