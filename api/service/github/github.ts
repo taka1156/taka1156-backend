@@ -1,4 +1,4 @@
-import { fetcher } from '~/tools/fetch/githubFetcher';
+import { fetcher } from '@/tools/fetch/githubFetcher';
 
 interface LangInfo {
   name: string;

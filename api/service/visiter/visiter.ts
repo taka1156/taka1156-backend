@@ -1,4 +1,4 @@
-import db from '~/tools/db/sqlite';
+import db from '@/tools/db/sqlite';
 
 // 閲覧者を計算して返却
 const getVisiterCounts = async (): Promise<SvgDisplay> => {
