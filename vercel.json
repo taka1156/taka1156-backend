@@ -1,8 +1,11 @@
 {
+  "builds": [
+    { "src": "dist/server.js", "use": "@vercel/node" }
+  ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "src/api/$1.ts"
+      "src": "/(.*)",
+      "dest": "dist/server.js"
     }
   ]
 }
