@@ -38,5 +38,5 @@ initializeCounter();
 
 export default {
   add: (viewer: string) => incrementViewer(Number(viewer)),
-  read: () => getViewerCount().toString(),
+  read: () => getViewerCount(),
 };
