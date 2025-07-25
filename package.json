@@ -1,7 +1,6 @@
 {
   "name": "taka1156-backend",
   "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
   "main": "server.js",
   "scripts": {
     "build": "webpack --config ./webpack/prod.config.js",
