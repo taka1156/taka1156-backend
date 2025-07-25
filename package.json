@@ -1,14 +1,11 @@
 {
   "name": "taka1156-backend",
   "version": "0.0.1",
-  "main": "server.js",
   "scripts": {
-    "build": "webpack --config ./webpack/prod.config.js",
-    "tsc": "tsc",
+    "tsc": "tsc --noEmit",
     "ts-node": "ts-node",
-    "start": "NODE_ENV=production npm run build && node dist/server.js",
-    "start-local": "node dist/server.js",
-    "start-ts": "NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts"
+    "dev": "NODE_ENV=development ts-node --files -r tsconfig-paths/register src/index.ts",
+    "start": "NODE_ENV=production npm run build && node dist/server.js"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
