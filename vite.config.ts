@@ -4,8 +4,8 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import { resolve } from 'path';
 
 export default defineConfig({
-    root: 'app',
-    cacheDir: resolve(__dirname + '/app/.cache'),
+    root: 'api',
+    cacheDir: resolve(__dirname + '/api/.cache'),
     server: {
         port: 9000,
     },
