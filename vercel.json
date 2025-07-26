@@ -1,5 +1,5 @@
 {
   "routes": [
-    { "src": "(.*)", "dest": "api/index.ts", "methods": ["GET"] }
+    { "src": "(.*)", "dest": "api/index.js", "methods": ["GET"] }
   ]
 }
