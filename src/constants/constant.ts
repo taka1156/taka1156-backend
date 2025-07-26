@@ -3,7 +3,7 @@ import { getEnv } from "./env";
 
 export const SERVICE = {
     GITHUB: {
-        TOKEN: getEnv(process.env.GITHUB_TOKEN)
+        TOKEN: getEnv('GITHUB_TOKEN')
     }
 }
 
