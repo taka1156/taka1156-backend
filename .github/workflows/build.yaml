@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build-deploy:
+  create-vercel-branch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +38,8 @@ jobs:
       # `vercel` ブランチを作成してプッシュ
       - name: Commit and push to vercel branch
         run: |
-          git checkout -b vercel
+          git fetch origin vercel || echo "No existing vercel branch."
+          git checkout -b vercel || git checkout vercel
           xargs -a .vercelkeep -I {} git add {}
-          git commit -m "Add files from .vercelkeep for Vercel deployment"
+          git commit -m "Add files for Vercel deployment at $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M:%S')"
           git push origin vercel --force
