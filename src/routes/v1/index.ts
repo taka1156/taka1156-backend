@@ -13,12 +13,7 @@ const HEADERS = {
 };
 
 // 簡易的な生死確認
-router.get('/', (req, res) => {
-  const client = req.query.client as param;
-  if (client === 'gas') {
-    res.send('Glitch woke up');
-    return;
-  }
+router.get('/', (_, res) => {
   res.send('<h1>Server is running</h1>');
 });
 

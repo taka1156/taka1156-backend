@@ -1,9 +1,9 @@
-import db from '@/tools/db/sqlite';
+import verecel from '@/tools/vercel/vercel';
 
 // 閲覧者を計算して返却
 const getVisiterCounts = async (): Promise<SvgDisplay> => {
-  const VIEWER = ((await db.read()) + 1).toString(); //　閲覧数読み取り
-  await db.add(VIEWER); // 閲覧数更新
+  const VIEWER = ((await verecel.read()) + 1).toString();
+  await verecel.add(VIEWER); // 閲覧数更新
   const SHAPED_VIEWER: SvgDisplay = shapedVisiterCounts(VIEWER);
   return SHAPED_VIEWER;
 };
