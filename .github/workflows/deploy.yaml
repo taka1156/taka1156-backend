@@ -1,9 +1,8 @@
-name: vercel deploy
+name: Run Deply
 
 on:
   workflow_run:
-    workflows:
-      - create-vercel-branch
+    workflows: [Run Build]
     types:
       - completed
 
@@ -18,6 +17,7 @@ env:
 jobs:
   deploy-vercel:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
 

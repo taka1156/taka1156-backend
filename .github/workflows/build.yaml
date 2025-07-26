@@ -1,4 +1,4 @@
-name: generate vercel deploy project
+name: Run Build
 
 on:
   push:
