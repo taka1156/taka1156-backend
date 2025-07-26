@@ -3,7 +3,7 @@ name: vercel deploy
 on:
   workflow_run:
     workflows:
-      - vercel-deploy
+      - create-vercel-branch
     types:
       - completed
 
