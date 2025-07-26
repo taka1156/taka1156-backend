@@ -1,6 +1,7 @@
+import { INFRA } from '@/constants/constant';
 import { put, list, PutCommandOptions } from '@vercel/blob';
 
-const blobName = 'counters.json';
+const blobName = INFRA.VERCEL.BLOB.FILENAME
 
 interface Counter {
   viewer: number;

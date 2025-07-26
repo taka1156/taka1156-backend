@@ -1,8 +1,7 @@
+import { TOOLS } from "@/constants/constant";
+
 // 表示関連
-const HEIGHT = 28;
-const WIDTH = 27;
-const DIGIT = 9; //桁
-const COLOR = 'cornflowerblue';
+const { HEIGHT, WIDTH, DIGIT, COLOR } = TOOLS.SVG
 
 // SVG生成(閲覧者数)
 const generateVisiterSvg = (viewer: SvgDisplay, color: Color = COLOR): string => {

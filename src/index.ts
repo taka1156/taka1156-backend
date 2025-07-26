@@ -2,11 +2,6 @@ import express from 'express';
 import { Server } from 'http';
 import { AddressInfo } from 'net';
 import { router } from '@/routes/v1';
-import  dotenv from 'dotenv';
-
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
-}
 
 const app: express.Express = express();
 app.use('/api/v1/', router);

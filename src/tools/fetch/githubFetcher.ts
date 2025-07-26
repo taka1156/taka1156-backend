@@ -1,10 +1,9 @@
+import { SERVICE } from '@/constants/constant';
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const fetcher = async (url: string, query: Query): Promise<AxiosResult> => {
   return await axios({
-    headers: { Authorization: `bearer ${process.env.GITHUB_TOKEN}` },
+    headers: { Authorization: `bearer ${SERVICE.GITHUB.TOKEN}` },
     url: url,
     method: 'post',
     data: query,
