@@ -6,7 +6,6 @@
       "destination": "/api"
     }
   ],
-  "ignoreCommand": "bash vercel-build.sh",
   "installCommand": "npm install --omit=dev",
   "buildCommand": ""
 }
