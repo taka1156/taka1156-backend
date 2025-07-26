@@ -1,0 +1,47 @@
+name: generate vercel deploy project
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.x'
+
+      - name: install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+      
+      - name: build
+        run: npm run build
+
+      # `.vercelkeep` に基づいてファイルをコピー
+      - name: Copy files listed in .vercelkeep
+        run: |
+          mkdir vercel-files
+          while read -r line; do
+            [ -n "$line" ] && cp -r "$line" vercel-files/
+          done < .vercelkeep
+
+      # Git設定
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      # `vercel` ブランチを作成してプッシュ
+      - name: Commit and push to vercel branch
+        run: |
+          git checkout -b vercel
+          mv vercel-files/* .
+          git add .
+          git commit -m "Add files from .vercelkeep for Vercel"
+          git push origin vercel --force
