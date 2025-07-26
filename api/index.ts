@@ -14,10 +14,10 @@ const listener: Server = app.listen(PORT, () => {
   if (process.env.NODE_ENV === 'development') {
     const { port } = listener.address() as AddressInfo;
     console.log('=============== Routes ===============');
-    console.log(`[ http://localhost:${port}/api/v1 ]`);
-    console.log(`[ http://localhost:${port}/api/v1/visiter.svg ]`);
-    console.log(`[ http://localhost:${port}/api/v1/date.svg ]`);
-    console.log(`[ http://localhost:${port}/api/v1/github.svg ]`);
+    console.log(`[ http://localhost:${port}/@/v1 ]`);
+    console.log(`[ http://localhost:${port}/@/v1/visiter.svg ]`);
+    console.log(`[ http://localhost:${port}/@/v1/date.svg ]`);
+    console.log(`[ http://localhost:${port}/@/v1/github.svg ]`);
     console.log('======================================');
   }
 });
