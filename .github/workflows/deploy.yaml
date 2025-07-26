@@ -1,0 +1,29 @@
+name: vercel deploy
+
+on:
+  push:
+    branches:
+      - vercel
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.x'
+
+      - name: install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install -g vercel
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
