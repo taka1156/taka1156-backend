@@ -7,5 +7,6 @@
     }
   ],
   "installCommand": "npm install --omit=dev",
-  "buildCommand": ""
+  "buildCommand": "",
+  "ignoreCommand": "bash vercel-build.sh"
 }
