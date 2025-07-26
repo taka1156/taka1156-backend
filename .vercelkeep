@@ -4,4 +4,3 @@ package-lock.json
 vercel-build.sh
 vercel.json
 .vercelkeep
-.github/workflows/deploy.yaml
