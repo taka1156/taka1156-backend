@@ -87,8 +87,9 @@ const getViewerCount = async (): Promise<number> => {
     const response = await fetch(blob.url);
     const blobData = await resolveBlob(response);
 
-    return blobData.viewer || 0;
     console.log('read viewer')
+    return blobData.viewer || 0;
+
   } catch (error) {
     console.error('Fetch error:', error);
     return 0;
