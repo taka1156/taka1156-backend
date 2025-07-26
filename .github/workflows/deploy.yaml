@@ -20,8 +20,7 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: install
-        if: steps.cache.outputs.cache-hit != 'true'
+      - name: deploy vercel
         run: |
           npm install -g vercel
           vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
