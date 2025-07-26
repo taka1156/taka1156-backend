@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const fetcher = async (url: string, query: Query): Promise<AxiosResult> => {
