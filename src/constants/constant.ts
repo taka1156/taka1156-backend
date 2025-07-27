@@ -1,6 +1,11 @@
 import { getEnv } from "./env";
 
 
+export const SETTING = {
+    PORT: getEnv('PORT') || 3000
+}
+
+
 export const SERVICE = {
     GITHUB: {
         TOKEN: getEnv('GITHUB_TOKEN')

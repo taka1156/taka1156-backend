@@ -1,9 +1,8 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv"
 
-
-export const getEnv = (key: string) => {
-    if (process.env.NODE_ENV !== 'production') {
-        dotenv.config();
+export const getEnv = (key: string): string => {
+    if (process.env.DEPLOY_ENV !== 'production') {
+        dotenv.config({ quiet: true });
     }
-    return process.env[key]
+    return process.env[key];
 }
