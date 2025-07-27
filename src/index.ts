@@ -13,3 +13,4 @@ app.listen(PORT, () => {
 
 
 export const viteNodeApp = app;
+export default app;
