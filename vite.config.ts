@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import { VitePluginNode } from 'vite-plugin-node';
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from "url";
 
@@ -22,7 +21,6 @@ export default defineConfig({
         emptyOutDir: true
     },
     plugins: [
-        nodePolyfills(),
         ...VitePluginNode({
             exportName: 'viteNodeApp',
             adapter: 'express',
